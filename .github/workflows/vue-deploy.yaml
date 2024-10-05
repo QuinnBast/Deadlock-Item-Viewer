@@ -26,18 +26,18 @@ jobs:
       - name: Copy index
         uses: canastro/copy-file-action@master
         with:
-          source: index.html
-          target: out/index.html
+          source: deadlock-item-viewer/index.html
+          target: deadlock-item-viewer/out/index.html
       - name: Copy dist
         uses: canastro/copy-file-action@master
         with:
-          source: dist/.
-          target: out/.
+          source: deadlock-item-viewer/dist/.
+          target: deadlock-item-viewer/out/.
           flags: '-r'
       - name: GitHub Pages
         uses: crazy-max/ghaction-github-pages@v1.5.1
         with:
           # Build directory to deploy
-          build_dir: out/
+          build_dir: deadlock-item-viewer/out/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
