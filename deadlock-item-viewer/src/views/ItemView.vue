@@ -23,8 +23,6 @@ onMounted(() => {
       async (success) => {
         var itemArray = await success.json()
         itemArray
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .sort((a, b) => a.cost - b.cost)
             .forEach((item) => {
               if(item.type === "upgrade") {
                 itemList.items.push(new Item(item))
@@ -40,14 +38,20 @@ onMounted(() => {
 
 function displayWeaponItems() {
   itemsToDisplay.items = itemList.items.filter((item) => item.item_slot_type === "weapon")
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.cost - b.cost)
 }
 
 function displaySpiritItems() {
   itemsToDisplay.items = itemList.items.filter((item) => item.item_slot_type === "spirit")
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.cost - b.cost)
 }
 
 function displayVitalityItems() {
   itemsToDisplay.items = itemList.items.filter((item) => item.item_slot_type === "vitality")
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.cost - b.cost)
 }
 
 function displayAllItems() {
