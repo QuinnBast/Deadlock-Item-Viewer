@@ -11,10 +11,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install git
-        run: apk add --no-cache git
+        uses: actions/checkout@v4
       - name: Build Web
         run: |
           cd deadlock-item-viewer
@@ -35,9 +32,10 @@ jobs:
           target: deadlock-item-viewer/out/.
           flags: '-r'
       - name: GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v1.5.1
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           # Build directory to deploy
           build_dir: deadlock-item-viewer/out/
+          target_branch: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
