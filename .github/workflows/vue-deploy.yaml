@@ -15,7 +15,8 @@ jobs:
 
       - name: Install git
         run: apk add --no-cache git
-
+      - name: Move dir
+        run: cd deadlock-item-viewer
       - name: Install packages
         run: npm install
       - name: Build website
