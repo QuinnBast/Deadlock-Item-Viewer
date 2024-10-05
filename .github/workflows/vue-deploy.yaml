@@ -15,16 +15,14 @@ jobs:
 
       - name: Install git
         run: apk add --no-cache git
-      - name: Move dir
-        run: cd deadlock-item-viewer
-      - name: Install packages
-        run: npm install
-      - name: Build website
-        run: npm run build
-      - name: Make out directory
-        run: mkdir out
-      - name: Make out dist directory
-        run: mkdir out/dist
+      - name: Build Web
+        run: |
+          cd deadlock-item-viewer
+          npm install
+          npm run build
+          mkdir out
+          mkdir out/dist
+
       - name: Copy index
         uses: canastro/copy-file-action@master
         with:
