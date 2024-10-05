@@ -1,0 +1,44 @@
+name: Deploy Website
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    container: node:lts-alpine
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install git
+        run: apk add --no-cache git
+
+      - name: Install packages
+        run: npm install
+      - name: Build website
+        run: npm run build
+      - name: Make out directory
+        run: mkdir out
+      - name: Make out dist directory
+        run: mkdir out/dist
+      - name: Copy index
+        uses: canastro/copy-file-action@master
+        with:
+          source: index.html
+          target: out/index.html
+      - name: Copy dist
+        uses: canastro/copy-file-action@master
+        with:
+          source: dist/.
+          target: out/.
+          flags: '-r'
+      - name: GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v1.5.1
+        with:
+          # Build directory to deploy
+          build_dir: out/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
